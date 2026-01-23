@@ -1,0 +1,88 @@
+[
+  {
+    "input_path": "D:\\@ARCHIVOS_USUARIO@\\Desktop\\CascadeProjects\\CRM-automation\\ocr-system\\temp\\test.png",
+    "page_index": null,
+    "doc_preprocessor_res": {
+      "input_path": null,
+      "page_index": null,
+      "input_img": "[[[255 ... 255]\n  ...\n  [255 ... 255]]\n\n ...\n\n [[255 ... 255]\n  ...\n  [255 ... 255]]]",
+      "model_settings": {
+        "use_doc_orientation_classify": true,
+        "use_doc_unwarping": true
+      },
+      "angle": 0,
+      "rot_img": "[[[255 ... 255]\n  ...\n  [255 ... 255]]\n\n ...\n\n [[255 ... 255]\n  ...\n  [255 ... 255]]]",
+      "output_img": "[[[255 ... 255]\n  ...\n  [255 ... 255]]\n\n ...\n\n [[255 ... 255]\n  ...\n  [255 ... 255]]]"
+    },
+    "dt_polys": [
+      "[[  0  91]\n ...\n [  0 105]]",
+      "[[125  91]\n ...\n [125 102]]",
+      "[[264  94]\n ...\n [264 109]]",
+      "[[378  90]\n ...\n [378 101]]",
+      "[[ 18 104]\n ...\n [ 18 117]]",
+      "[[122 103]\n ...\n [122 116]]",
+      "[[362 103]\n ...\n [362 113]]"
+    ],
+    "model_settings": {
+      "use_doc_preprocessor": true,
+      "use_textline_orientation": false
+    },
+    "text_det_params": {
+      "limit_side_len": 64,
+      "limit_type": "min",
+      "thresh": 0.3,
+      "max_side_limit": 4000,
+      "box_thresh": 0.6,
+      "unclip_ratio": 1.5
+    },
+    "text_type": "general",
+    "text_rec_score_thresh": 0.0,
+    "return_word_box": false,
+    "rec_texts": [
+      "DOCUMENT",
+      "SCANNED",
+      "OCR",
+      "TEXT",
+      "SCAN",
+      "IMAGE FILE",
+      "DOCUN"
+    ],
+    "rec_scores": [
+      0.999610960483551,
+      0.99992835521698,
+      0.9971106052398682,
+      0.9552874565124512,
+      0.9996744394302368,
+      0.9992610812187195,
+      0.9298681020736694
+    ],
+    "rec_polys": [
+      "[[  0  91]\n ...\n [  0 105]]",
+      "[[125  91]\n ...\n [125 102]]",
+      "[[264  94]\n ...\n [264 109]]",
+      "[[378  90]\n ...\n [378 101]]",
+      "[[ 18 104]\n ...\n [ 18 117]]",
+      "[[122 103]\n ...\n [122 116]]",
+      "[[362 103]\n ...\n [362 113]]"
+    ],
+    "vis_fonts": [
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>",
+      "<paddlex.utils.fonts.Font object at 0x0000023126B6A350>"
+    ],
+    "textline_orientation_angles": [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "rec_boxes": "[[  0 ... 105]\n ...\n [362 ... 113]]"
+  }
+]

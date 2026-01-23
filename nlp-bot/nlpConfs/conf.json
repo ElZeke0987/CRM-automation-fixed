@@ -1,0 +1,15 @@
+{ 
+        "use":["Basic", "LangEs"],
+        "settings": {
+            "nlp": {
+                "languages": ["es"],
+                "forceNER": true,
+                "corpora": ["./nlpConfs/corpus.json"]
+            },
+            "logger": {
+                "level": "error",
+                "silent": false
+            }
+        }
+        
+}

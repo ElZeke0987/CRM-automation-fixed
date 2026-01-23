@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@nlpjs/basic": "^5.0.0-alpha.5",
+    "@nlpjs/lang-es": "^5.0.0-alpha.5",
+    "clipboardy": "^5.0.2",
+    "node-global-key-listener": "^0.3.0",
+    "playwright": "^1.57.0"
+  }
+}
