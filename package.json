@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "activate-ocr-venv": "ocr-system/entorno-virtual/Scripts/activate",
+    "start-ocr": "python ocr-system/codes/main.py",
+    "start-ocr:win": "python ocr-system/codes/main.py"
+  },
   "dependencies": {
     "@nlpjs/basic": "^5.0.0-alpha.5",
     "@nlpjs/lang-es": "^5.0.0-alpha.5",

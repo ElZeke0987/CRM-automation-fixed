@@ -11,6 +11,8 @@ ocr = PaddleOCR(
 
 #image_path = r'D:\@ARCHIVOS_USUARIO@\Desktop\CascadeProjects\CRM-automation\ocr-system\temp\scsh.png'
 
+import pytesseract
+
 
 """
     Available attributes: ['__class__', '__class_getitem__', '__contains__', '
@@ -54,17 +56,25 @@ def buscarImagenes():
         print(f"  {ruta}")
 
 def ocrStep(lista_imagenes_bgr):
+    
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     print("OCR Step, processing image... ")
     #lista_imagenes = [os.path.join('./ocr-system/temp', f) for f in os.listdir('./ocr-system/temp') if f.endswith(('.png', '.jpg', '.jpeg'))]
     
     if not lista_imagenes_bgr:
         print("No hay imágenes para procesar")
         return
-    
-    result = ocr.predict(lista_imagenes_bgr)
+    print(f"Procesando {len(lista_imagenes_bgr)} imágenes")
+    results = []
+    for img in lista_imagenes_bgr:
+        result = pytesseract.image_to_string(img, lang="spa")
+        print(f"Result: {result}")
+        results.append(result)
+
+    #result = pytesseract.image_to_string(lista_imagenes_bgr, lang="spa")
     #image_path = r'D:\@ARCHIVOS_USUARIO@\Desktop\CascadeProjects\CRM-automation\ocr-system\temp\scsh.png'
 
-    for res in result:
+    for res in results:
         all_texts = res.get('rec_texts')
         number = all_texts[0]
         print(f"rec-texts: {all_texts}")

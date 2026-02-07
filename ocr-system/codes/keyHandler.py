@@ -19,7 +19,8 @@ def al_presionar(tecla):
         print("=====SCREENSHOT TAKEN=====")
         capturar_ventana_mss("WhatsApp")
     if nombre_tecla == 'o':
-        
+        print("=====OCR STEP=====")
+        print(f"Procesando {len(lista_imagenes_bgr)} imágenes")
         ocrStep(lista_imagenes_bgr)
         lista_imagenes_bgr.clear()
     # ACCIÓN: Detener el programa con la tecla 'Esc'
@@ -28,8 +29,9 @@ def al_presionar(tecla):
     if tecla == keyboard.Key.esc:
         print("Cerrando programa...")
         return False
-    
-# Iniciar el escuchador
-with keyboard.Listener(on_press=al_presionar) as escuchador:
-    print("Escuchando inputs de teclado")
-    escuchador.join()
+
+def startKeyHandler():
+    # Iniciar el escuchador
+    with keyboard.Listener(on_press=al_presionar) as escuchador:
+        print("Escuchando inputs de teclado")
+        escuchador.join()

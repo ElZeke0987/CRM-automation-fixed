@@ -51,8 +51,9 @@ def capturar_ventana_mss(titulo_ventana):
             img_bgr = cv2.cvtColor(img_array, cv2.COLOR_BGRA2BGR)
             lista_imagenes_bgr.append(img_bgr)
             # 3. Guardar usando Pillow (mucho más robusto que mss.tools)
-           # nombre_archivo = f"./ocr-system/temp/scsh_{int(time.time())}.png"
-            #img.save(nombre_archivo, "PNG")
+            nombre_archivo = f"./ocr-system/temp/scsh_{int(time.time())}.png"
+            img = Image.fromarray(img_bgr)
+            img.save(nombre_archivo, "PNG")
             
             print(f"✓ Captura corregida guardada en lista, total: {len(lista_imagenes_bgr)}")
             #ocrStep() # Descomenta cuando verifiques que la imagen sale bien

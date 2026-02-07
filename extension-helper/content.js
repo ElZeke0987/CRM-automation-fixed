@@ -41,7 +41,7 @@ const pullRadioIcon = optGroupIcon[0]
 const pullElementSelect = document.getElementById("spullderi")
 const leadCelInp=document.getElementById("leadcel")
 const leadLocationInp=document.getElementById("leadloca")
-const submitFinalButton = document.querySelector("button[type='submit']")
+
 const nnnButton = document.querySelectorAll("#nn1")
 
 
@@ -182,8 +182,60 @@ function setAsNNN(num, areaNumber){
     
     pullElementSelect.value = 100;
     setToInterior(areaNumber, true);
+    localStorage.setItem("lastWasNNN", "true");
 }
  console.log("Testing: ", window.location.hostname)
+// Función para sumar
+function sumar(valor, storageKey) {
+
+    if(localStorage.getItem("lastWasNNN") === "true"){
+
+        let contador = Number(localStorage.getItem("NNN_" + storageKey)) || 0;
+        contador += valor;
+        localStorage.setItem("NNN_" + storageKey, contador);
+        localStorage.setItem("lastWasNNN", "false");
+        console.log("NNN " + storageKey + " actualizado:", contador);
+        return;
+    }
+
+    let contador = Number(localStorage.getItem(storageKey)) || 0;
+    contador += valor;
+    localStorage.setItem(storageKey, contador);
+    //console.log("Número actualizado:", contador);
+}
+window.addEventListener("load", () => {
+    if(window.location.hostname=="crm.jeny.com.ar"){
+        
+        const contactUpdateResult = document.querySelector("#statusmsg")
+        if(contactUpdateResult.textContent){
+            const content = contactUpdateResult.textContent;
+            console.log("Contact update result:", content);
+            if(content=="Se actualizó contacto!"){
+                sumar(1, "actualizado");
+            }
+            if(content=="Se agregó contacto!"){
+                sumar(1, "agregado");
+            }
+            console.log("Actualizados:", localStorage.getItem("actualizado") || 0);
+            console.log("Agregados:", localStorage.getItem("agregado") || 0);
+
+        }
+        const botSelector = document.querySelector("select[name='leadori']");
+        console.log("Bot selector found:", botSelector);
+        if(botSelector){
+            botSelector.value = "Q";
+            botSelector.dispatchEvent(new Event("change", {bubbles: true}));
+        }
+
+
+        window.scrollTo({
+            top: 250,        // altura en píxeles
+            left: 0,         // casi siempre 0
+            behavior: "smooth" // "smooth" para animado, "auto" para instantáneo
+        });
+
+    }
+})
 
 document.addEventListener("keypress", async (ev)=>{
     
@@ -219,9 +271,18 @@ document.addEventListener("keypress", async (ev)=>{
         
         
         
-        if(ev.key=="e"||ev.key=="E"){
+        if(ev.key=="°"){
+            const submitFinalButton = document.querySelector(".box-body button[type='submit']")
+            console.log("submitFinalButton", submitFinalButton)
             console.log("reloading")
             submitFinalButton.dispatchEvent(new Event("click", {bubbles: true}))
+            submitFinalButton.dispatchEvent(
+                new MouseEvent("click", {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                })
+            );
         }
         if(ev.key=="6"){
             console.log("Derivando a interior")
@@ -246,7 +307,13 @@ document.addEventListener("keypress", async (ev)=>{
 let whatsappNumber;
 
 const observer = new MutationObserver(async(mutations, obs) => {
+
+    if(mutations[0].target.id=="statusmsg"){
+        console.log("This result papu: ", mutations[0].target)
+        return
+    }
     if(window.location.hostname!="web.whatsapp.com"){
+        
         return
     }
 
