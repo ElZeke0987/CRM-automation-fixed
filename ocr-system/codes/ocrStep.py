@@ -75,12 +75,14 @@ def ocrStep(lista_imagenes_bgr):
     #image_path = r'D:\@ARCHIVOS_USUARIO@\Desktop\CascadeProjects\CRM-automation\ocr-system\temp\scsh.png'
 
     for res in results:
-        all_texts = res.get('rec_texts')
-        number = all_texts[0]
+        all_texts = res
+        number = all_texts
         print(f"rec-texts: {all_texts}")
+        
 
-
-        clearedText = clearText(all_texts)
-        print(f"clearedText: {clearedText}")
-        ejecutarNLPJS(clearedText)
+        
         print("-" * 50)
+
+#clearedText = clearText(all_texts)
+#print(f"clearedText: {clearedText}")
+#ejecutarNLPJS(clearedText)

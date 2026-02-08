@@ -5,4 +5,5 @@ const aButton = document.querySelector('.a-button');
 const cButton = document.querySelector('.c-button');
 const sButton = document.querySelector('.s-button');
 
-console.log("TESTING")
+console.log("TESTING FROM POPUP.TS")
+

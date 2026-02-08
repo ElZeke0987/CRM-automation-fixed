@@ -31,7 +31,7 @@ def capturar_ventana_mss(titulo_ventana):
     
     diseno_regiones = {
             "numero": {"left": int(ventana.left + 410), "top": int(ventana.top + 125), "width": 300, "height": 60},
-            "chat": {"left": int(ventana.left + 610), "top": int(ventana.top + 200), "width": 760, "height": 525}#110
+            "chat": {"left": int(ventana.left + 690), "top": int(ventana.top + 200), "width": 610, "height": 525}#110
         }
     with mss.mss() as sct:
         try:

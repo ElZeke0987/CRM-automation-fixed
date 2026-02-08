@@ -26,7 +26,7 @@ def al_presionar(tecla):
     # ACCIÓN: Detener el programa con la tecla 'Esc'
     if nombre_tecla == 'i':
         ejecutarNLPJS("automation")
-    if tecla == keyboard.Key.esc:
+    if tecla == keyboard.Key.esc :
         print("Cerrando programa...")
         return False
 

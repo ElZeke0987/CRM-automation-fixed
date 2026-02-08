@@ -1,4 +1,7 @@
 
+// import { areasInterior } from './utils/areasInterior.js';
+
+
 const areasInterior=[//Hacer que se auto aprenda retro alimentandose del input
     { region: "", codigos: ["3464", "2478", "3489", "3484", "2235", "2223"] },
     
@@ -26,9 +29,6 @@ const areasInterior=[//Hacer que se auto aprenda retro alimentandose del input
     { region: "Río Negro", codigos: ["2920", "298"] },
     { region: "Tierra del Fuego", codigos: ["2901"] }
 ];
-
-
-
 let copyFunction = true;
 
 const optGroup = document.querySelectorAll(".md-check .has-value")
@@ -52,7 +52,8 @@ const deriGroupSelect = document.getElementById("sgrupoderi")
 
 const listMessagesInChat = document.querySelectorAll(".x1f6kntn.xjb2p0i.x8r4c90.xo1l8bm.x1ic7a3i.x12xpedu._ao3e._aupe.copyable-text")
 
-function mostrarcampo(){
+function mostrarcampo(){//Es como un re-render normal, solo para verificar sobre algo que ya paso, que es el click automatico sobre un radio
+    //Resetea todas las posibles selecciones anteriores
     document.getElementById("operasig").style.display = "none";
     document.getElementById("soperasig").removeAttribute('required');
     document.getElementById("grupoderi").style.display = "none";
@@ -66,7 +67,7 @@ function mostrarcampo(){
             var radioid = radio.value;
         }
     }
-
+    //Itera y finalmente muestra automaticamente la que corresponda
     if(radioid == 'asignar'){
         document.getElementById("operasig").style.display = "flex";
         document.getElementById("soperasig").setAttribute("required","");
@@ -186,7 +187,7 @@ function setAsNNN(num, areaNumber){
 }
  console.log("Testing: ", window.location.hostname)
 // Función para sumar
-function sumar(valor, storageKey) {
+function plusToStorage(valor, storageKey) {
 
     if(localStorage.getItem("lastWasNNN") === "true"){
 
@@ -211,10 +212,10 @@ window.addEventListener("load", () => {
             const content = contactUpdateResult.textContent;
             console.log("Contact update result:", content);
             if(content=="Se actualizó contacto!"){
-                sumar(1, "actualizado");
+                plusToStorage(1, "actualizado");
             }
             if(content=="Se agregó contacto!"){
-                sumar(1, "agregado");
+                plusToStorage(1, "agregado");
             }
             console.log("Actualizados:", localStorage.getItem("actualizado") || 0);
             console.log("Agregados:", localStorage.getItem("agregado") || 0);
@@ -271,7 +272,7 @@ document.addEventListener("keypress", async (ev)=>{
         
         
         
-        if(ev.key=="°"){
+        if(ev.key=="Enter"||ev.key=="°"){
             const submitFinalButton = document.querySelector(".box-body button[type='submit']")
             console.log("submitFinalButton", submitFinalButton)
             console.log("reloading")
@@ -312,15 +313,23 @@ const observer = new MutationObserver(async(mutations, obs) => {
         console.log("This result papu: ", mutations[0].target)
         return
     }
+    
     if(window.location.hostname!="web.whatsapp.com"){
         
         return
     }
 
-    console.log("Mutation detected: ", listMessagesInChat)
+    //console.log("Mutation detected: ", listMessagesInChat)
     const whatsappNumberElement = document.querySelectorAll('.x1iyjqo2 .x6ikm8r .x10wlt62')
     const inputTextWithNumber= document.querySelectorAll('.x1hx0egp.x6ikm8r.x1odjw0f.x1k6rcq7.x6prxxf')
-    
+    const allMessages = document.querySelectorAll('x1n2onr6 .x1f6kntn.xjb2p0i.x8r4c90.xo1l8bm.x1ic7a3i.x12xpedu._ao3e._aupe.copyable-text')
+    // const elementsToClear = document.querySelectorAll(".x1c4vz4f.x2lah0s.xdl72j9.xlese2p")
+
+    // if(elementsToClear.length > 0){
+    //     elementsToClear.forEach(element => {
+    //         element.innerHTML = ""
+    //     })
+    // }
 
     const actualVisibleProfileNumber = whatsappNumberElement[1]?.innerHTML
     const actualInvisibleInpNumber = "+" + inputTextWithNumber[1]?.getAttribute("aria-label").replace(/^\D+|\.$/g, '')
@@ -328,9 +337,9 @@ const observer = new MutationObserver(async(mutations, obs) => {
     console.log("Still working? on visible profile number: ", actualVisibleProfileNumber, " and: ", actualInvisibleInpNumber)
 
     if (whatsappNumber!=actualVisibleProfileNumber && copyFunction) {
-        whatsappNumber = actualVisibleProfileNumber
 
-        console.log("whatssap: ", whatsappNumber)
+        whatsappNumber = typeof actualVisibleProfileNumber === 'string' ? actualVisibleProfileNumber : actualVisibleProfileNumber.textContent ? actualVisibleProfileNumber.textContent : actualInvisibleInpNumber
+        
          try {
             await navigator.clipboard.writeText(whatsappNumber)
         } catch (err) {
