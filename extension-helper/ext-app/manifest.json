@@ -3,7 +3,6 @@
   "name": "CRM Automation",
   "version": "1.2",
   "description": "An automation method for CRMs, made by o-lvl",
-  
   "permissions": [
     "activeTab",
     "storage",
@@ -21,7 +20,7 @@
   "content_scripts": [
     {
       "matches": ["https://crm.jeny.com.ar/addlead.php", "https://web.whatsapp.com/"],
-      "js": ["./dist/content.js"],
+      "js": ["dist/index.js"],
       "css": ["style.css"],
       "run_at": "document_end"
     }

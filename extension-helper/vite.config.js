@@ -8,10 +8,15 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        content: "src/inyect/index.ts",
-        background: "src/background/index.ts",
+        index: "src/index.ts",
+        // content: "src/inyect/index.ts",
+        // background: "src/background/index.ts",
+        // //dummy: "src/index.html",
         popup: "src/popup/popup.html",
-        popupjs: "src/popup/popup.ts"
+        // popupjs: "src/popup/popup.ts",
+        toolPanel: "src/tool-panel/tool-panel.html",
+        // toolPaneljs: "src/tool-panel/index.ts",
+       
       },
       output: {
         entryFileNames: "[name].js",
