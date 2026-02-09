@@ -1,9 +1,10 @@
 
-import { copyFunctionAccessor, pullByKey} from "./vars";
+import { copyFunctionAccessor, pullByKey} from "./vars/vars";
 import { getCopiedText, formatNumber} from "./utils";
 import { setAsNNN, setToInterior, setupPullRadio, mostrarcampo } from "./domActions";
-import { domCRM } from "./domVars";
+import { domCRM } from "./vars/domVars";
 import { testSelectorOnWsp } from "./testSelectorOnWsp";
+import { copyFunctionAdvise } from "./inyectElements";
 
 
 export async function handleKeyInyected(ev: KeyboardEvent) {
@@ -26,10 +27,12 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
         if(ev.key=="-"){
             console.log("Changing copy function to false")
             copyFunctionAccessor.set(false)
+            copyFunctionAdvise(false)
         }
         if(ev.key=="+"){
             console.log("Changing copy function to true")
             copyFunctionAccessor.set(true)
+            copyFunctionAdvise(true)
         }
     }
     

@@ -4,7 +4,8 @@
   "version": "1.2",
   "description": "An automation method for CRMs, made by o-lvl",
   "permissions": [
-    "activeTab",
+    "tabs",
+    "windows",
     "storage",
     "scripting",
     "clipboardRead",
@@ -17,17 +18,18 @@
     
 
   ],
+  
   "content_scripts": [
     {
-      "matches": ["https://crm.jeny.com.ar/addlead.php", "https://web.whatsapp.com/"],
+      "matches": ["https://crm.jeny.com.ar/addlead.php", "https://web.whatsapp.com/*"],
       "js": ["dist/index.js"],
-      "css": ["style.css"],
+      "css": ["dist/style.css"],
       "run_at": "document_end"
     }
   ],
   "action": {
     "default_popup": "./dist/src/popup/popup.html",
-   "default_title": "Website Modifier"
+    "default_title": "Website Modifier"
   }
   
   

@@ -1,6 +1,6 @@
 
 
-import { domCRM } from "./domVars";
+import { domCRM } from "./vars/domVars";
 import { handleKeyInyected } from "./keyHandling";
 import { onWindowLoadInyected } from "./onWindowLoad";
 

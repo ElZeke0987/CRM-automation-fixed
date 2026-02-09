@@ -13,6 +13,8 @@
   "packageManager": "pnpm@10.28.2",
   "devDependencies": {
     "@types/chrome": "^0.1.36",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
     "vite": "^7.3.1"
   }
 }

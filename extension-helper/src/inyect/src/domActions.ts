@@ -1,8 +1,8 @@
 
 import { formatNumber } from "./utils";
-import { areaNumbers, areasInterior } from "./areasVars";
-import { copyFunctionAccessor } from "./vars";
-import { domCRM } from "./domVars";
+import { areaNumbers, areasInterior } from "./vars/areasVars";
+import { copyFunctionAccessor } from "./vars/vars";
+import { domCRM } from "./vars/domVars";
 export function setupPullRadio() {
     const pullRadioEl = domCRM.pullRadio() as HTMLInputElement;
     pullRadioEl.checked = true;

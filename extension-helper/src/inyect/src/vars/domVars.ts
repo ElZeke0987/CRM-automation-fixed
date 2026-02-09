@@ -30,13 +30,37 @@ const whatsappNumberSelector = `header
 
 const inputTextWithNumberSelector = `.x1hx0egp.x6ikm8r.x1odjw0f.x1k6rcq7.x6prxxf`
 
-const allMessagesSelector = `x1n2onr6 .x1f6kntn.xjb2p0i.x8r4c90.xo1l8bm.x1ic7a3i.x12xpedu._ao3e._aupe.copyable-text`
+export const allInMessagesSelector = `.message-in .x9f619.x1hx0egp.x1yrsyyn.xizg8k.xu9hqtb.xwib8y2 .copyable-text .copyable-text span`
 
 const elementsToClearSelector = `.x1c4vz4f.x2lah0s.xdl72j9.xlese2p`
+
+const innerInMessageContentSelector = `.copyable-text .copyable-text`
+
+function extractMessagesFromElement(): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    const start = Date.now()
+    const interval = setInterval(() => {
+      const el = document.querySelectorAll(allInMessagesSelector) as NodeListOf<HTMLElement>
+      if (el) {
+        const messages = Array.from(el).map((element, index) => {
+          //console.log("Mensaje:", index, element.innerHTML)
+          return element.textContent
+        })
+        //console.log("messages", messages)
+        clearInterval(interval)
+        resolve(messages)
+      }
+      if (Date.now() - start > 10000) {
+        clearInterval(interval)
+        reject(null)
+      }
+    }, 200)
+  })
+}
 
 export const domWsp/*: DomWspTypes*/ = {
     whatsappNumberElement: () => document.querySelector(whatsappNumberSelector),
     inputTextWithNumber: () => document.querySelectorAll(inputTextWithNumberSelector)[1] as HTMLInputElement,
-    allMessages: () => document.querySelectorAll(allMessagesSelector),
+    allInMessages: async () => await extractMessagesFromElement(),
     elementsToClear: () => document.querySelectorAll(elementsToClearSelector)
 }

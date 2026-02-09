@@ -5,22 +5,18 @@ export default defineConfig({
     outDir: "ext-app/dist",
     emptyOutDir: true,
     minify: false,
-    sourcemap: true,
+    //sourcemap: true,
     rollupOptions: {
       input: {
         index: "src/index.ts",
-        // content: "src/inyect/index.ts",
-        // background: "src/background/index.ts",
-        // //dummy: "src/index.html",
-        popup: "src/popup/popup.html",
-        // popupjs: "src/popup/popup.ts",
-        toolPanel: "src/tool-panel/tool-panel.html",
-        // toolPaneljs: "src/tool-panel/index.ts",
-       
+        //back: "src/back-index.ts",
+        popup: "src/popup.html",
+       // toolPanel: "src/tool-panel.html",
+        style: "src/style.css"
       },
       output: {
         entryFileNames: "[name].js",
-        assetFileNames: "[name].[ext]"
+        assetFileNames: "[name].[ext]",
       }
     }
   }

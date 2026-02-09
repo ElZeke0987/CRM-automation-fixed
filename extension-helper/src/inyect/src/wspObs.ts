@@ -1,6 +1,7 @@
 
-import { domWsp } from "./domVars";
-import { copyFunctionAccessor } from "./vars";
+import { allInMessagesSelector, domWsp } from "./vars/domVars";
+import { copyFunctionAccessor } from "./vars/vars";
+import { initRecognizing } from "./word-recognizer/index";
 
 let whatsappNumber: string;
 
@@ -19,7 +20,6 @@ const observer = new MutationObserver(async(mutations, obs) => {
     //console.log("Mutation detected: ", listMessagesInChat)
     const whatsappNumberElement = domWsp?.whatsappNumberElement()
     const inputTextWithNumber= domWsp?.inputTextWithNumber()
-    const allMessages = domWsp?.allMessages()
     // const elementsToClear = document.querySelectorAll(".x1c4vz4f.x2lah0s.xdl72j9.xlese2p")
 
     // if(elementsToClear.length > 0){
@@ -38,12 +38,12 @@ const observer = new MutationObserver(async(mutations, obs) => {
 
     if(!whatsappNumberElement&&!inputTextWithNumber){
         
-        console.log("No se encontro ningun elemento con el numero!!!! Cancelando operacion ", whatsappNumberElement, inputTextWithNumber)
+        //console.log("No se encontro ningun elemento con el numero!!!! Cancelando operacion ", whatsappNumberElement, inputTextWithNumber)
         return
     }
     const numberFromInput = inputTextWithNumber?.getAttribute("aria-label")
     if(!numberFromInput){
-        console.log("No se encontro el atributo del numero en el input, es posible que actualInvisibleInpNumber sea undefined")
+        //console.log("No se encontro el atributo del numero en el input, es posible que actualInvisibleInpNumber sea undefined")
     }
     const actualInvisibleInpNumber = `+${numberFromInput?.replace(/^\D+|\.$/g, '')}`
     const actualVisibleProfileNumber = whatsappNumberElement?.innerHTML || actualInvisibleInpNumber
@@ -52,23 +52,26 @@ const observer = new MutationObserver(async(mutations, obs) => {
    
 
     if(!actualVisibleProfileNumber){
-        console.log("No se encontro el numero visible!!!!")
-        console.log("whatsappNumberElement: ", actualVisibleProfileNumber, "whatsappNumberElement: ", whatsappNumberElement)
+       ///console.log("No se encontro el numero visible!!!!")
+        //console.log("whatsappNumberElement: ", actualVisibleProfileNumber, "whatsappNumberElement: ", whatsappNumberElement)
         alert("No se encontro el numero visible!!!! (ver consola)")
     }
     if(!actualInvisibleInpNumber){
-        console.log("No se encontro el numero invisible del input!!!!")
-        console.log("numberFromInput: ", numberFromInput)
+       //console.log("No se encontro el numero invisible del input!!!!")
+        //console.log("numberFromInput: ", numberFromInput)
         alert("No se encontro el numero invisible del input!!!! (ver consola)")
     }
 
-    console.log("Still working? on visible profile number: ", actualVisibleProfileNumber, " and: ", actualInvisibleInpNumber)
+    //console.log("Still working? on visible profile number: ", actualVisibleProfileNumber, " and: ", actualInvisibleInpNumber)
 
     if (whatsappNumber!=actualVisibleProfileNumber && copyFunctionAccessor.val) {
-
+        
         whatsappNumber = actualVisibleProfileNumber || actualInvisibleInpNumber
-        console.log("Copiando numero: ", whatsappNumber)
+        //console.log("Copiando numero: ", whatsappNumber)
          try {
+            const allInMessages = await domWsp.allInMessages()
+            //console.log("allInMessages: ", allInMessages)
+            initRecognizing(allInMessages.join(" "))
             await navigator.clipboard.writeText(whatsappNumber)
         } catch (err) {
             console.error('Error al copiar: ', err);

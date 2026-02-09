@@ -1,4 +1,4 @@
-import { domCRM } from "./domVars";
+import { domCRM } from "./vars/domVars";
 import { plusToStorage } from "./utils";
 
 export function onWindowLoadInyected(e: Event)  {
