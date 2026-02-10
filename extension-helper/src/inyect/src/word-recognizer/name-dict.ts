@@ -1,4 +1,4 @@
-import type { dictType } from "./types";
+import type { dictType } from "../types";
 
 export const nameDict: dictType = {
     "name": "nombres",

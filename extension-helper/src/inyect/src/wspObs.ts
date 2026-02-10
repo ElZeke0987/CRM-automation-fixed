@@ -1,4 +1,5 @@
 
+import { advise } from "./inyectElements";
 import { CopiedText } from "./types";
 import { allInMessagesSelector, domWsp } from "./vars/domVars";
 import { copyFunctionAccessor } from "./vars/vars";
@@ -21,6 +22,10 @@ const observer = new MutationObserver(async(mutations, obs) => {
     //console.log("Mutation detected: ", listMessagesInChat)
     const whatsappNumberElement = domWsp?.whatsappNumberElement()
     const inputTextWithNumber= domWsp?.inputTextWithNumber()
+    if(!whatsappNumberElement&&!inputTextWithNumber){
+        console.log("No se encontro ningun elemento con el numero!!!! Cancelando operacion ")
+        return
+    }
     // const elementsToClear = document.querySelectorAll(".x1c4vz4f.x2lah0s.xdl72j9.xlese2p")
 
     // if(elementsToClear.length > 0){
@@ -37,11 +42,7 @@ const observer = new MutationObserver(async(mutations, obs) => {
     //     console.log("La lista de mensajes no tiene elementos")
     // }
 
-    if(!whatsappNumberElement&&!inputTextWithNumber){
-        
-        //console.log("No se encontro ningun elemento con el numero!!!! Cancelando operacion ", whatsappNumberElement, inputTextWithNumber)
-        return
-    }
+
     const numberFromInput = inputTextWithNumber?.getAttribute("aria-label")
     if(!numberFromInput){
         //console.log("No se encontro el atributo del numero en el input, es posible que actualInvisibleInpNumber sea undefined")
@@ -74,6 +75,17 @@ const observer = new MutationObserver(async(mutations, obs) => {
             //console.log("allInMessages: ", allInMessages)
             const recognized = initRecognizing(allInMessages.join(" "))
             const copiedText: CopiedText = {whatsappNumber, recognized: recognized[0]}
+            
+            let finalAdvise = `${copiedText.recognized.location || "No se reconocio LOCALIDAD"} (${copiedText.recognized.pull || "No se reconocio PULL"})`
+            if(!copiedText.recognized.location||copiedText.recognized.location==''||copiedText.recognized.location==null){
+
+                finalAdvise = "No se reconocio LOCALIDAD"
+            }
+            if((!copiedText.recognized.pull||copiedText.recognized.pull==''||copiedText.recognized.pull==null) && copiedText.recognized.location){
+                finalAdvise = "No se reconocio PULL para: " + copiedText.recognized.location
+            }
+            advise(!copiedText.recognized.location||!copiedText.recognized.pull ? false : true, finalAdvise)
+            console.log("copiedText", copiedText)
             await navigator.clipboard.writeText(JSON.stringify(copiedText))
         } catch (err) {
             console.error('Error al copiar: ', err);

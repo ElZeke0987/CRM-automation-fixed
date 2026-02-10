@@ -4,7 +4,7 @@ import { getCopiedText, formatNumber} from "./utils";
 import { setAsNNN, setToInterior, setupPullRadio, mostrarcampo } from "./domActions";
 import { domCRM } from "./vars/domVars";
 import { testSelectorOnWsp } from "./testSelectorOnWsp";
-import { copyFunctionAdvise } from "./inyectElements";
+import { advise } from "./inyectElements";
 
 
 export async function handleKeyInyected(ev: KeyboardEvent) {
@@ -27,12 +27,12 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
         if(ev.key=="-"){
             console.log("Changing copy function to false")
             copyFunctionAccessor.set(false)
-            copyFunctionAdvise(false)
+            advise(false, "Copy function disabled")
         }
         if(ev.key=="+"){
             console.log("Changing copy function to true")
             copyFunctionAccessor.set(true)
-            copyFunctionAdvise(true)
+            advise(true, "Copy function enabled")
         }
     }
     
@@ -57,10 +57,22 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
                 leadCelInp.dispatchEvent(new Event("input", {bubbles: true}))
             }
             if(leadLocInp){
-                leadLocInp.value = awaitTextoCopiado.recognized
+                
+                leadLocInp.value = awaitTextoCopiado.recognized.location
                 console.log("leadLocInp.value", leadLocInp.value)
                 leadLocInp.dispatchEvent(new Event("input", {bubbles: true}))
             }
+            if(!awaitTextoCopiado.recognized.pull){
+                alert("No hay PULL para: " + awaitTextoCopiado.recognized.location)
+            }else if(awaitTextoCopiado.recognized.pull && awaitTextoCopiado.recognized.pull != "interior"){
+                setupPullRadio()
+                const pullElementSelect = domCRM.pullElementSelect() as HTMLSelectElement
+                
+                pullElementSelect.value = awaitTextoCopiado.recognized.pull
+                pullElementSelect.dispatchEvent(new Event("change", { bubbles: true }));
+                console.log("awaitTextoCopiado.recognized.pull", awaitTextoCopiado.recognized.pull)
+            }
+            
         }
         
         

@@ -5,6 +5,7 @@ import { clearText } from "./clearer";
 import { normalize } from "./normalizer";
 import { buildPullsDict, dictToIndex } from "./build-dicts";
 import { buildLocDict, buildNameDict } from "./build-dicts";
+import { RecognitionResult } from "../types";
 
 const EXACT_MAP = new Map<string, string>();
 
@@ -56,7 +57,10 @@ const numbersToWords: Record<string, string> = {
   30: "treinta",
   31: "treinta y uno"
 };
-export function recognizeWord(input: string): string | null {
+
+
+
+export function recognizeWord(input: string): RecognitionResult {
     // TODO: Implement center recognition logic
 
     // const clearedText = clearText(input);
@@ -95,23 +99,22 @@ export function recognizeWord(input: string): string | null {
         );
         locationDetect = longest;
     }
-    if(!locationDetect) return null
-    return locationDetect
-    // for(const entry of buildPullsDict) {
-    //     //console.log("Trying: ", normalize(entry.match), " === ", normalize(locationDetect))
-    //     if(normalize(entry.match) === normalize(locationDetect)) {
-    //         console.log("RETURNING AFTER RECOGNIZING========", input, entry)
-    //         return entry.match;
-    //     }
-    // }
-    return null;
+    if(!locationDetect) return {location: "", pull: ""}
+    for(const entry of buildPullsDict) {
+        //console.log("Trying: ", normalize(entry.match), " === ", normalize(locationDetect))
+        if(normalize(entry.match) === normalize(locationDetect)) {
+            console.log("RETURNING AFTER RECOGNIZING========", input, entry)
+            return {location: locationDetect, pull: entry.canonical};
+        }
+    }
+    return {location: locationDetect, pull: ""};
 }
 
-export function recognizeListWords(input: string[]): string[] {
+export function recognizeListWords(input: string[]): RecognitionResult[] {
     // TODO: Implement center recognition logic
 
     
-    const results: string[] = [];
+    const results: RecognitionResult[] = [];
     input.forEach(word => {
         const result = recognizeWord(word);
         if (result) {

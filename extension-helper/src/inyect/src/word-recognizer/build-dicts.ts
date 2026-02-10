@@ -4,7 +4,7 @@
 import { nameDict } from "./name-dict";
 import { locationDictionary, pullsDict } from "./loc-dict";
 import { normalize } from "./normalizer";
-import type { Entity, dictType } from "./types";
+import type { Entity, dictType } from "../types";
 
 
 export const NAME_EXACT_MAP = new Map<string, Entity[]>();

@@ -1,5 +1,5 @@
 
-import type { dictType } from "./types";
+import type { dictType } from "../types";
 
 export const noroestePullLocs = [//101
     "isidro casanova", "gonzales catan", "la matanza",
