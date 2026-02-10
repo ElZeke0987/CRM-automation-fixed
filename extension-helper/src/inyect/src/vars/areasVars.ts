@@ -34,11 +34,11 @@ export const areasInterior: Area[]=[//Hacer que se auto aprenda retro alimentand
     { region: "Salta", codigos: ["387", "3877"] },
     { region: "Catamarca", codigos: ["383", "3834"] },
     { region: "San Juan", codigos: ["264", "2644"] },
-    { region: "San Luis", codigos: ["266"] },
+    { region: "San Luis", codigos: ["266", "2665", "2664"] },
     { region: "Tucumán", codigos: ["381", "3863", "3816"] },
     { region: "Jujuy", codigos: ["388"] },
     { region: "Santa Fe", codigos: ["342", "3492", "3415", "3404", "341", "2353", "2473", "2477", "3382", "3401", "3405", "3483" ] },
-    { region: "La Pampa", codigos: ["2954"] },
+    { region: "La Pampa", codigos: ["2954", "2334"] },
     { region: "Santiago del Estero", codigos: ["385", "3857", "3856"] },
     { region: "Río Negro", codigos: ["2920", "298"] },
     { region: "Tierra del Fuego", codigos: ["2901"] }

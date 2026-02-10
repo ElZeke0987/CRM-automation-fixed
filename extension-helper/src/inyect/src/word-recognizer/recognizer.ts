@@ -23,7 +23,39 @@ function generateWindows(tokens: string[], maxSize = 4) {
 
   return windows;
 }
-
+const numbersToWords: Record<string, string> = {
+  1: "uno",
+  2: "dos",
+  3: "tres",
+  4: "cuatro",
+  5: "cinco",
+  6: "seis",
+  7: "siete",
+  8: "ocho",
+  9: "nueve",
+  10: "diez",
+  11: "once",
+  12: "doce",
+  13: "trece",
+  14: "catorce",
+  15: "quince",
+  16: "dieciséis",
+  17: "diecisiete",
+  18: "dieciocho",
+  19: "diecinueve",
+  20: "veinte",
+  21: "veintiuno",
+  22: "veintidós",
+  23: "veintitrés",
+  24: "veinticuatro",
+  25: "veinticinco",
+  26: "veintiséis",
+  27: "veintisiete",
+  28: "veintiocho",
+  29: "veintinueve",
+  30: "treinta",
+  31: "treinta y uno"
+};
 export function recognizeWord(input: string): string | null {
     // TODO: Implement center recognition logic
 
@@ -36,23 +68,42 @@ export function recognizeWord(input: string): string | null {
     const tokens = normalizedInput.split(" ");
     const windows = generateWindows(tokens);
     //console.log("Windows:", windows);
+    const found: any[] = []
     for(const entry of buildLocDict) {
-        if(windows.some(window => {
-            //console.log("trying:", entry.match, " == ", window.text);
-            return window.text===normalize(entry.match)
-        })) {
-            console.log("Location detected:", entry.canonical)
-            locationDetect = entry.canonical;
-        }
+        //console.log("trying:", entry.match);
+        windows.forEach(window => {
+            
+            if(window.text===normalize(entry.match)) {
+                console.log("Found location:", window, entry.match)
+                found.push(entry.canonical)
+            }
+        })
+        
+    }
+    if(found.length > 0) {
+        console.log("FIND ", found)
+        const longest = found.reduce((max, curr) =>{
+            if(curr.text&&max.text){
+                return curr.text.length > max.text.length ? curr : max
+            }
+            return max
+        });
+        console.log("Longest: ", longest)
+        longest.replace(
+            /\b([1-9]|[12][0-9]|3[01])\b/g,
+            (n: string) => numbersToWords[n]
+        );
+        locationDetect = longest;
     }
     if(!locationDetect) return null
-    for(const entry of buildPullsDict) {
-        console.log("Trying: ", normalize(entry.match), " === ", normalize(locationDetect))
-        if(normalize(entry.match) === normalize(locationDetect)) {
-            console.log("RETURNING AFTER RECOGNIZING========", input, entry)
-            return entry.match;
-        }
-    }
+    return locationDetect
+    // for(const entry of buildPullsDict) {
+    //     //console.log("Trying: ", normalize(entry.match), " === ", normalize(locationDetect))
+    //     if(normalize(entry.match) === normalize(locationDetect)) {
+    //         console.log("RETURNING AFTER RECOGNIZING========", input, entry)
+    //         return entry.match;
+    //     }
+    // }
     return null;
 }
 

@@ -1,4 +1,5 @@
 
+import { CopiedText } from "./types";
 import { allInMessagesSelector, domWsp } from "./vars/domVars";
 import { copyFunctionAccessor } from "./vars/vars";
 import { initRecognizing } from "./word-recognizer/index";
@@ -71,8 +72,9 @@ const observer = new MutationObserver(async(mutations, obs) => {
          try {
             const allInMessages = await domWsp.allInMessages()
             //console.log("allInMessages: ", allInMessages)
-            initRecognizing(allInMessages.join(" "))
-            await navigator.clipboard.writeText(whatsappNumber)
+            const recognized = initRecognizing(allInMessages.join(" "))
+            const copiedText: CopiedText = {whatsappNumber, recognized: recognized[0]}
+            await navigator.clipboard.writeText(JSON.stringify(copiedText))
         } catch (err) {
             console.error('Error al copiar: ', err);
             // Aquí puedes mostrar un mensaje amigable al usuario

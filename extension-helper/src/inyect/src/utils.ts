@@ -1,9 +1,12 @@
+import { CopiedText } from "./types";
+
 export function formatNumber(num: string): string {
     return num.replace(/\D+/g, '')
 }
 
-export async function getCopiedText(): Promise<string> {
-    return await navigator.clipboard.readText()
+export async function getCopiedText(): Promise<CopiedText> {
+    const crudeJSON = await navigator.clipboard.readText()
+    return JSON.parse(crudeJSON)
 }
 
 // Función para sumar

@@ -1,7 +1,7 @@
 import { inyElementsVars } from "./inyElementsVars";
-
+const appElement = document.querySelector("#app")
 export function copyFunctionAdvise(active: boolean){
-    const appElement = document.querySelector("#app")
+    
     if(appElement){
         const searchAndDelete = document.querySelector(".copy-function-advise")
         if(searchAndDelete){
@@ -19,5 +19,14 @@ export function copyFunctionAdvise(active: boolean){
         setTimeout(() => {
             copyFunctionAdviseElement.remove()
         }, 2500)
+    }
+}
+
+export function toolPanel(){
+    if(appElement){
+        const toolPanelElement = document.createElement("div")
+        toolPanelElement.className = "tool-panel"
+        toolPanelElement.innerHTML = "Tool Panel"
+        appElement.appendChild(toolPanelElement)
     }
 }

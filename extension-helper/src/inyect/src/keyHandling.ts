@@ -39,20 +39,27 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
     if(window.location.hostname=="crm.jeny.com.ar"){
         
         const awaitTextoCopiado = await getCopiedText();
-        const areaNumber = awaitTextoCopiado.split(" ")[2]
+        const areaNumber = awaitTextoCopiado.whatsappNumber.split(" ")[2]
         if(ev.key=="}"){
             console.log("banana")
-            setAsNNN({num: awaitTextoCopiado, areaNumber})
+            setAsNNN({num: awaitTextoCopiado.whatsappNumber, areaNumber})
         }
         if(ev.key=="{"||ev.key=="|"){
             
             setupPullRadio();
             setToInterior({areaNumber, isNNNAction: false});
-            console.log("Copiando texto en el input de numero")
+            console.log("Copiando texto en el input de numero y de localidad")
             const leadCelInp = domCRM.leadCelInp();
+            const leadLocInp = domCRM.leadLocationInp();
+
             if(leadCelInp){
-                leadCelInp.value = "+" + formatNumber(awaitTextoCopiado)
+                leadCelInp.value = "+" + formatNumber(awaitTextoCopiado.whatsappNumber)
                 leadCelInp.dispatchEvent(new Event("input", {bubbles: true}))
+            }
+            if(leadLocInp){
+                leadLocInp.value = awaitTextoCopiado.recognized
+                console.log("leadLocInp.value", leadLocInp.value)
+                leadLocInp.dispatchEvent(new Event("input", {bubbles: true}))
             }
         }
         
