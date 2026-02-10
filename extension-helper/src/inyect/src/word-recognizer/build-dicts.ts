@@ -25,7 +25,7 @@ export function dictToIndex(dict: dictType ): Entity[] {
   const index: Entity[] = [];
 
   function processOptions(
-    options: Record<string, string[]>,
+    options: Record<string, readonly string[]>,
     category: string,
     subType: string,
   ) {

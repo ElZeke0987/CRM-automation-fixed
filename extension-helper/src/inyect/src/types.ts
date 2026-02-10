@@ -19,7 +19,7 @@ type dictNames = "nombres"|"localidades"|"pulls";
 export interface dictType {
     "name": dictNames;
     "type": "enum";
-    "options": {
+    "options":  {
         [key: string]: readonly string[];
     };
 }
