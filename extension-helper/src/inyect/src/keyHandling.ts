@@ -27,12 +27,12 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
         if(ev.key=="-"){
             console.log("Changing copy function to false")
             copyFunctionAccessor.set(false)
-            advise(false, "Copy function disabled")
+            advise({active: false, text: "Copy function disabled"})
         }
         if(ev.key=="+"){
             console.log("Changing copy function to true")
             copyFunctionAccessor.set(true)
-            advise(true, "Copy function enabled")
+            advise({active: true, text: "Copy function enabled"})
         }
     }
     
@@ -41,7 +41,7 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
         const awaitTextoCopiado = await getCopiedText();
         const areaNumber = awaitTextoCopiado.whatsappNumber.split(" ")[2]
         if(ev.key=="}"){
-            console.log("banana")
+            console.log("awaitTextoCopiado", awaitTextoCopiado)
             setAsNNN({num: awaitTextoCopiado.whatsappNumber, areaNumber})
         }
         if(ev.key=="{"||ev.key=="|"){
@@ -63,7 +63,7 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
                 leadLocInp.dispatchEvent(new Event("input", {bubbles: true}))
             }
             if(!awaitTextoCopiado.recognized.pull){
-                alert("No hay PULL para: " + awaitTextoCopiado.recognized.location)
+                //alert("No hay PULL para: " + awaitTextoCopiado.recognized.location)
             }else if(awaitTextoCopiado.recognized.pull && awaitTextoCopiado.recognized.pull != "interior"){
                 setupPullRadio()
                 const pullElementSelect = domCRM.pullElementSelect() as HTMLSelectElement

@@ -84,7 +84,7 @@ const observer = new MutationObserver(async(mutations, obs) => {
             if((!copiedText.recognized.pull||copiedText.recognized.pull==''||copiedText.recognized.pull==null) && copiedText.recognized.location){
                 finalAdvise = "No se reconocio PULL para: " + copiedText.recognized.location
             }
-            advise(!copiedText.recognized.location||!copiedText.recognized.pull ? false : true, finalAdvise)
+            advise({active: !copiedText.recognized.location||!copiedText.recognized.pull ? false : true, text: finalAdvise})
             console.log("copiedText", copiedText)
             await navigator.clipboard.writeText(JSON.stringify(copiedText))
         } catch (err) {

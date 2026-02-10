@@ -102,8 +102,8 @@ export function recognizeWord(input: string): RecognitionResult {
     if(!locationDetect) return {location: "", pull: ""}
     for(const entry of buildPullsDict) {
         //console.log("Trying: ", normalize(entry.match), " === ", normalize(locationDetect))
-        if(normalize(entry.match) === normalize(locationDetect)) {
-            console.log("RETURNING AFTER RECOGNIZING========", input, entry)
+        if(normalize(entry.match.toLowerCase()) === normalize(locationDetect.toLowerCase())) {
+            console.log("RETURNING AFTER RECOGNIZING========", locationDetect.toLowerCase(), entry)
             return {location: locationDetect, pull: entry.canonical};
         }
     }

@@ -20,6 +20,6 @@ export interface dictType {
     "name": dictNames;
     "type": "enum";
     "options": {
-        [key: string]: string[];
+        [key: string]: readonly string[];
     };
 }

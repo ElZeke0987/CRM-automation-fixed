@@ -7,6 +7,22 @@
     }
 }
 
+.advises-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    z-index: 100000;
+    top: 10px;
+    left: 80vw;
+    
+}
+
+.advises-section .copy-function-advise{
+    position: static;
+}
+
+
 .copy-function-advise{
     all: initial;
     font-family: system-ui;
@@ -21,7 +37,7 @@
     transition: all 0.5s ease-in-out;
     animation: dissappearAnim 2.5s ease-in;
 }
-.inactive-copy{
-    background-color: red;
+.inactive-copy, .advises-section .copy-function-advise .inactive-copy{
+    background-color: red ;
     color: #fff;
 }

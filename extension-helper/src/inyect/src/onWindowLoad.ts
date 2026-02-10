@@ -5,7 +5,8 @@ export function onWindowLoadInyected(e: Event)  {
     if(window.location.hostname=="crm.jeny.com.ar"){
         
         const contactUpdateResult = domCRM.contactUpdateResult();
-        if(contactUpdateResult?.textContent){
+        const lastWasNNN = localStorage.getItem("lastWasNNN") === "true";
+        if(contactUpdateResult?.textContent && !lastWasNNN){
             const content = contactUpdateResult.textContent;
             console.log("Contact update result:", content);
             if(content=="Se actualizó contacto!"){

@@ -30,7 +30,19 @@ export function dictToIndex(dict: dictType ): Entity[] {
     subType: string,
   ) {
     for (const canonical in options) {
-      
+      const canonEntity: Entity = {
+        match: normalize(canonical),
+        canonical,
+        category,
+        subType,
+        priority: canonical.length
+      }
+      index.push(canonEntity);
+      const EXACT_MAP = objOfMaps[dict.name];
+      if (!EXACT_MAP.has(canonEntity.match)) {
+          EXACT_MAP.set(canonEntity.match, []);
+      }
+      EXACT_MAP.get(canonEntity.match)!.push(canonEntity);
       for (const variant of options[canonical]) {
         const entity: Entity = {
             match: normalize(variant),
