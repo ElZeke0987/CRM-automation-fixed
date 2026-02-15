@@ -1,9 +1,12 @@
 
+import { saveLeadData } from "./dataToStorage";
 import { advise } from "./inyectElements";
 import { CopiedText } from "./types";
 import { allInMessagesSelector, domWsp } from "./vars/domVars";
-import { copyFunctionAccessor } from "./vars/vars";
+import { copyFunctionAccessor } from "./vars/configVars";
 import { initRecognizing } from "./word-recognizer/index";
+import { recognizeOutMessages } from "./word-recognizer/recognizeOutMessages";
+import { revisionRequestUI } from "./sendToCRM";
 
 let whatsappNumber: string;
 
@@ -74,7 +77,12 @@ const observer = new MutationObserver(async(mutations, obs) => {
             const allInMessages = await domWsp.allInMessages()
             //console.log("allInMessages: ", allInMessages)
             const recognized = initRecognizing(allInMessages.join(" "))
-            const copiedText: CopiedText = {whatsappNumber, recognized: recognized[0]}
+            const allOutMessages = await domWsp.allOutMessages()
+            const recognizedOut = recognizeOutMessages(allOutMessages, recognized[0])
+            console.log("saving lead data: ", {whatsappNumber, recognized: recognized[0], messageToSend: recognizedOut})
+            await saveLeadData({whatsappNumber, recognized: recognized[0], messageToSend: recognizedOut})
+            const copiedText: CopiedText = {whatsappNumber, recognized: recognized[0], messageToSend: recognizedOut}
+            
             
             let finalAdvise = `${copiedText.recognized.location || "No se reconocio LOCALIDAD"} (${copiedText.recognized.pull || "No se reconocio PULL"})`
             if(!copiedText.recognized.location||copiedText.recognized.location==''||copiedText.recognized.location==null){
@@ -86,7 +94,10 @@ const observer = new MutationObserver(async(mutations, obs) => {
             }
             advise({active: !copiedText.recognized.location||!copiedText.recognized.pull ? false : true, text: finalAdvise})
             console.log("copiedText", copiedText)
-            await navigator.clipboard.writeText(JSON.stringify(copiedText))
+            revisionRequestUI()
+            
+            await navigator.clipboard.writeText(copiedText.messageToSend)
+
         } catch (err) {
             console.error('Error al copiar: ', err);
             // Aquí puedes mostrar un mensaje amigable al usuario

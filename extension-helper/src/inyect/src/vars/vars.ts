@@ -1,9 +1,4 @@
 
-export const copyFunctionAccessor = {
-    val: true,
-    set: (value: boolean) => copyFunctionAccessor.val = value
-}
-
 export const pullByKey: Record<string, string> = {
     "1": "103",//Varela 1
     "2": "100",//Agua 2

@@ -1,10 +1,13 @@
 
-import { copyFunctionAccessor, pullByKey} from "./vars/vars";
+import { pullByKey} from "./vars/vars";
+import { copyFunctionAccessor } from "./vars/configVars";
 import { getCopiedText, formatNumber} from "./utils";
-import { setAsNNN, setToInterior, setupPullRadio, mostrarcampo } from "./domActions";
+import { insertOnInputs, setAsNNN, setToInterior, setupPullRadio, mostrarcampo } from "./domActions";
 import { domCRM } from "./vars/domVars";
 import { testSelectorOnWsp } from "./testSelectorOnWsp";
 import { advise } from "./inyectElements";
+import { resetLeadData } from "./dataToStorage";
+import { ToolPanel } from "./toolPanel";
 
 
 export async function handleKeyInyected(ev: KeyboardEvent) {
@@ -21,8 +24,9 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
     //This function its async due to the getCopiedText function
     console.log("Key pressed: ", ev.key)
     if(window.location.hostname=="web.whatsapp.com"){
-        if(ev.key=="*"){
-            testSelectorOnWsp()
+        if(ev.key=="F8"){
+            //testSelectorOnWsp()
+            ToolPanel()
         }
         if(ev.key=="-"){
             console.log("Changing copy function to false")
@@ -37,42 +41,23 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
     }
     
     if(window.location.hostname=="crm.jeny.com.ar"){
-        
-        const awaitTextoCopiado = await getCopiedText();
-        const areaNumber = awaitTextoCopiado.whatsappNumber.split(" ")[2]
-        if(ev.key=="}"){
-            console.log("awaitTextoCopiado", awaitTextoCopiado)
-            setAsNNN({num: awaitTextoCopiado.whatsappNumber, areaNumber})
+        if(ev.key=="-"){
+            console.log("Resetting lead data")
+            resetLeadData()
+            return
         }
-        if(ev.key=="{"||ev.key=="|"){
-            
-            setupPullRadio();
-            setToInterior({areaNumber, isNNNAction: false});
-            console.log("Copiando texto en el input de numero y de localidad")
-            const leadCelInp = domCRM.leadCelInp();
-            const leadLocInp = domCRM.leadLocationInp();
-
-            if(leadCelInp){
-                leadCelInp.value = "+" + formatNumber(awaitTextoCopiado.whatsappNumber)
-                leadCelInp.dispatchEvent(new Event("input", {bubbles: true}))
+        const awaitTextoCopiado = await getCopiedText();
+        if(awaitTextoCopiado){
+            const areaNumber = awaitTextoCopiado.whatsappNumber.split(" ")[2] 
+            if(ev.key=="}"){
+                console.log("awaitTextoCopiado", awaitTextoCopiado)
+                setAsNNN({num: awaitTextoCopiado.whatsappNumber, areaNumber})
             }
-            if(leadLocInp){
+            if(ev.key=="{"||ev.key=="|"){
                 
-                leadLocInp.value = awaitTextoCopiado.recognized.location
-                console.log("leadLocInp.value", leadLocInp.value)
-                leadLocInp.dispatchEvent(new Event("input", {bubbles: true}))
-            }
-            if(!awaitTextoCopiado.recognized.pull){
-                //alert("No hay PULL para: " + awaitTextoCopiado.recognized.location)
-            }else if(awaitTextoCopiado.recognized.pull && awaitTextoCopiado.recognized.pull != "interior"){
-                setupPullRadio()
-                const pullElementSelect = domCRM.pullElementSelect() as HTMLSelectElement
+                insertOnInputs(awaitTextoCopiado)
                 
-                pullElementSelect.value = awaitTextoCopiado.recognized.pull
-                pullElementSelect.dispatchEvent(new Event("change", { bubbles: true }));
-                console.log("awaitTextoCopiado.recognized.pull", awaitTextoCopiado.recognized.pull)
             }
-            
         }
         
         
@@ -90,6 +75,8 @@ export async function handleKeyInyected(ev: KeyboardEvent) {
                     cancelable: true
                 })
             );
+            console.log("resetting lead data")
+            resetLeadData()
         }
         if(ev.key=="6"){
             console.log("Derivando a interior")

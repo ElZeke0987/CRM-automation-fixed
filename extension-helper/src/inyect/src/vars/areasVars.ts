@@ -3,7 +3,10 @@ export const areaNumbers: Record<string, string>= {
     "221": "yes",
     "2213": "yes",
     "2214": "yes",
+    "2215": "yes",
     "2216": "yes",
+    "2217": "yes",
+    
     "230": "yes",
     "237": "yes",
     "3848": "yes",   

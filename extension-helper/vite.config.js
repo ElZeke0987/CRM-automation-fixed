@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: "src/index.ts",
+        background: "src/back-index.ts",
         //back: "src/back-index.ts",
         popup: "src/popup.html",
        // toolPanel: "src/tool-panel.html",

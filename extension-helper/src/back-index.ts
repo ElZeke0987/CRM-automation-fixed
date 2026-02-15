@@ -1,3 +1,6 @@
-import initToolPanel from "./tool-panel/index";
+import { setGlobalListeners } from "./background";
 
-//initToolPanel();
+
+
+
+setGlobalListeners();

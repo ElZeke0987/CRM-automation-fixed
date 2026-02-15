@@ -1,9 +1,10 @@
 import { domCRM } from "./vars/domVars";
 import { plusToStorage } from "./utils";
+import { resetLeadData } from "./dataToStorage";
 
 export function onWindowLoadInyected(e: Event)  {
     if(window.location.hostname=="crm.jeny.com.ar"){
-        
+
         const contactUpdateResult = domCRM.contactUpdateResult();
         const lastWasNNN = localStorage.getItem("lastWasNNN") === "true";
         if(contactUpdateResult?.textContent && !lastWasNNN){

@@ -22,11 +22,16 @@ export const noroestePullLocs = [//101
     "del viso", "tortuguitas", "vicente lópez", "ituzaingo", "san miguel",
     "tigre", "acasusso", "escobar", "rafael castillo", "grand bourg", "loma hermosa",
     "villa celina", "benavidez", "virrey del pino", "ramos mejía", "san fernando",
-    "villa tesei", "martin coronado", "villa jose leon suarez", "marcos paz", "Martínez",
+    "villa tesei", "martin coronado", "jose leon suarez", "marcos paz", "Martínez",
     "bella vista", "olivos", "don torcuato", "luján", "castelar", "paso del rey", "villa luzuriaga",
-    "el talar", "matheu"
-   
+    "el talar", "matheu", "boulogne sur mer", "beccar", "zona oeste", "zona norte", "zona noroeste",
+    "san antonio de padua", "libertad", "gral rodríguez", "mariano acosta", "virreyes", "villa de mayo",
+    "González Catán", "munro", "los polvorines"
 ];
+
+export const partidos = [//Para que cuando hayan varias coincidencias, se elige primero la localidad antes que el partido
+    "caba", "la matanza", "moreno", "merlo"
+]
 
 export const cabaPullLocs = [ //102
     "caba", "caseros","parque patricios","almagro", "villa crespo",
@@ -35,7 +40,8 @@ export const cabaPullLocs = [ //102
     "belgrano", "boedo", "chacarita", "colegiales", "constitucion", "la boca", "montserrat", 
     "nuñez", "palermo", "recoleta", "retiro", "saavedra", "san cristobal", "san nicolas", 
     "velez sarsfield", "villa devoto", "villa del parque", "villa paternal", "villa santa rita", 
-    "villa soldati", "villa urquiza", "villa trujui", "villa lugano"
+    "villa soldati", "villa urquiza", "villa trujui", "villa lugano", "villa martelli", "ciudadela",
+    "villa ballester"
 
 ];
 
@@ -46,7 +52,7 @@ export const varelaPullLocs = [ //103
     "San Francisco Solano Este","San Francisco Solano Oeste",
     "Pereyra","Ringuelet","Gorina","City Bell","Villa Domselaar","Ardigó"
     ,"Bosques","Zeballos", "platanos", "ranelagh", "ezpeleta", "Villa Vatteone","Punta Lara", "el pato",
-    "Ardigó","Villa Garibaldi","Pereyra", "hudson", "burzaco", "bernal oeste"
+    "Ardigó","Villa Garibaldi","Pereyra", "hudson", "burzaco", "bernal oeste", "berisso"
 
 ] as const;
 
@@ -57,7 +63,7 @@ export const surPullLocs = [ //104
     "glew", "monte chingolo", "carlos spegazzini", "almirante brown",
     "adrogue", "burzaco", "claypole", "dock sud",  
     "llavallol",  "sarandi", "sourigues", "el jaguel","José Mármol","Rafael Calzada","San José",
-    "San Vicente", "esteban echeverría", "canning"
+    "San Vicente", "esteban echeverría", "canning", "Valentín Alsina", "san jose", "ingeniero budge"
 
 ] ;
 
@@ -70,7 +76,8 @@ export const interiorPullLocs = [ //interior
     "chaco", "resistencia", "chubut", "rawson", "formosa",  "santa rosa",
     "campana", "zarate", "clorinda", "mar del plata", "orense", "bahia blanca"
     ,"Monte Veloz","Villa Elisa", "Villa Domselaar", "carmen de areco", "venado tuerto"
-    ,"tandil"
+    ,"tandil", "vedia", "chacabuco", "gualeguaychu", "azul", "la rioja"
+    ,"mar de las pampas", "miramar","pinamar"
   ];
 
 
@@ -107,7 +114,7 @@ export const locationDictionary: dictType = {
         "Avellaneda": ["Avelaneda", "Abellaneda", "Avejaneda", "Vellaneda"],
         "Banfield": ["Banfild", "Banfiel", "Bamfield", "Banfild"],
         "Berazategui": ["Berazateguy", "Berazatequi", "Berasategui", "Bera"],
-        "Caba": ["caba", "Capital", "Capital federal", "Ciudad de Buenos Aires", "Ciudad de Bs.As.", "Ciudad de bs as"],
+        "CABA": ["caba", "Capital", "Capital federal", "Ciudad de Buenos Aires", "Ciudad de Bs.As.", "Ciudad de bs as"],
         "Caseros": ["Caserus", "Casero", "Caceros", "Cazeros"],
         "Castelar": ["Castellar", "Castelan", "Castelar", "Castelar"],
         "Ciudad Evita": ["C. Evita", "Cdad. Evita", "Ciudadevita", "Evita Ciudad"],
@@ -128,7 +135,8 @@ export const locationDictionary: dictType = {
         "Florencio Varela": ["Florencio", "F. Varela", "Varela", "Floren Varela"],
         "Gerli": ["Gerli", "Jerli", "Gerly", "Guerli"],
         "González Catán": ["Gonzalez Catan", "Gonzales Catán", "GonzaCatán", "Catán", "gonsales catan", "gonsalez catan", "gonzalés catán", "gonzales catan", "gonales catan", "gonáles catan", "gonzález catan", "gonzalez catan"],
-        "Gregorio de Laferrère": ["Laferrère", "Gregorio Laferrere", "Laferrere", "G. Laferrère", "lafe", "laferrere", "laferr", "la fe", "laferrer", "laferer"],
+        "Gregorio de Laferrère": ["Laferrère", "la ferrere"," la ferreres", "laferere", "la ferere", "la fereres","Gregorio Laferrere", 
+            "Laferrere", "G. Laferrère", "lafe", "laferrere", "laferr", "la fe", "laferrer", "laferer", "laferre", "lafere", "la ferre", "lafer", "laferr"],
         "Del Viso": ["del viso"],
         "Parque Patricios": ["parque patricio", "parque patricios"],
         "Campana": ["campana"],
@@ -166,9 +174,12 @@ export const locationDictionary: dictType = {
 
         "Ensenada": ["ensenada"],
         "Punta Lara": ["punta lara"],
-
+        "Berisso": ["berisso", "beriso", "berriso", "berrisso"],
+        "Gral Rodríguez": ["general rodriguez", "general rodrigues", "gral rodrigues", "g rodriguez", "rodriguez", "rodríguez", "rodrigez", "rodriges"],
+        "Munro": ["munro", "munroe"],
         "Villa Domselaar": ["domselaar", "villa domselaar"],
         "Alejandro Korn": ["alejandro korn", "korn"],
+        "San Antonio de Padua": ["san antonio de padua", "san antonio padua", "padua", "antonio de padua", "san anton de padua", "antoniodepadua"],
 
         "Villa Trujui": ["villa trujui", "trujui"],
 
@@ -179,10 +190,10 @@ export const locationDictionary: dictType = {
 
         "Haedo": ["Haedo", "Aedo", "Haedho", "Haedo CABA"],
         "Hurlingham": ["Hurlingam", "Hurlinghan", "Huringham", "Hurlin"],
-        "Isidro Casanova": ["Casanova", "I. Casanova", "IsidroCasa", "Casanova Bs.As.", "Casa", "Casanoba", "Isidro C."],
+        "Isidro Casanova": ["Casanova", "I. Casanova", "IsidroCasa", "Casanova Bs.As.", "Casano", "Casanoba", "Isidro C."],
         "Ituzaingó": ["Ituzaingo", "Ituzáingo", "Ituzaingó", "Itu"],
-        "José C. Paz": ["Jose C. Paz", "J. C. Paz", "José Paz", "JC Paz"],
-        "Villa Jose Leon Suarez": ["jose leon suarez", "villa j leon suárez", "leon suarez", "villa leon suárez", "j l suarez", "j l suárez", "villa j l suarez"],
+        "José C. Paz": ["Jose C. Paz", "J C Paz", "José Paz", "JC Paz", "José ce paz", "Jose  ce paz", "jose ce pas", "jspaz", "jcpaz"],
+        "Jose Leon Suarez": ["jose leon suarez", "villa j leon suárez", "leon suarez", "villa leon suárez", "j l suarez", "j l suárez", "villa j l suarez"],
         "Matheu": ["Mateu", "Matheuu"],
         "La Matanza": ["Matanza", "Lamatanza", "LaMatanza", "Partido de La Matanza"],
         "Lanús": ["Lanus", "Lanuz", "Lanús Oeste", "Lanús Este"],
@@ -193,7 +204,7 @@ export const locationDictionary: dictType = {
         "Benavidez": ["Benavides", "benavid"],
         "Llavallol": ["Llavallol", "Yavallol", "Llavalol", "LlaValol"],
         "Lomas de Zamora": ["Lomas Zamora", "LomasDeZamora", "Lomas", "LoZamora"],
-        "Longchamps": ["Longchamps", "Longchamp", "Lonchamps", "Longshamps", "longchanps"],
+        "Longchamps": ["Longchamps", "Longchamp", "Lonchamps", "Longshamps", "longchanps", "lomgchamps", "lomgchanps"],
         "Los Polvorines": ["Polvorines", "L. Polvorines", "LosPolvorines", "Polvorin"],
         "Luis Guillón": ["Guillon", "lui guillo", "luis guiilon", "luis guillon", "guillón"],
 
@@ -217,15 +228,20 @@ export const locationDictionary: dictType = {
         "San Justo": ["SanJusto", "S. Justo", "San Just", "SanJust", "san justo", "san juto", "sa justo", "zan juzto", "san just", "an justo", " an juto", "an jto", "san jsto"],
         "San Miguel": ["SanMiguel", "S. Miguel", "SanMi", "San Migue"],
         "Sarandí": ["Sarandi", "Sarandí", "Sarandí Avellaneda", "Zarandí"],
-        "Solano": ["Solano", "Villa Solano", "Solan", "Sola", "Solano Oeste"],
+        "Solano": ["Solano", "Villa Solano", "Solan", "Solano Oeste"],
         "San Andres": ["San Andres", "SanAndres", "S. Andres", "SanAndres"],
         "Tapiales": ["Tapiales", "Tapial", "Tapi", "Tapiales Bs.As.", "Tapia"],
         "Temperley": ["Temperley", "Temperlei", "Temp", "Temper"],
         "Tigre": ["Tigre", "Tigre Centro", "Tigre Delta", "Tigre Bs.As.", "Tgre", "Tigr"],
-        
+        "Chacabuco": ["Chacabuco", "Chacabuco", "Chacabuco"],
+        "Mariano Acosta": ["Marian Acosta", "M Acosta", "Acosta merlo", "mar acosta", "marino acosta"],
+        "Gualeguaychu": ["gualeguaychu", "gualeguaychú"],
+        "San Jose": ["San Jos", "S Jose"],
+        "Ingeniero Budge": ["ing budge", "ingeniero budje", "ingeniero budg", "ing budg", "ing budje"],
         
         
         "Valentín Alsina": ["Valentin Alsina", "V. Alsina", "Alsina", "ValenAlsina"],
+        "Vedia": ["vedia"],
         "Vicente López": ["VicenteLopez", "V. López", "Vicente López", "VicenLopez"],
         "Villa Ballester": ["V. Ballester", "Ballester", "VillaBallester", "Villa B.","Ballester Bs.As.", "VillaBalles"],
         "Villa Centenario": ["V. Centenario", "Centenario", "VillaCentenario", "VillaCen"],
@@ -263,7 +279,7 @@ export const locationDictionary: dictType = {
         "Villa Albertina": ["V. Albertina", "Albertina Bs.As.", "VillaAlber"],
         "Villa Ayacucho": ["Ayacucho", "V. Ayacucho", "Ayacucho Bs.As.", "VillaAyacu"],
         "Villa Bosch": ["Bosch", "V. Bosch", "Bosch Bs.As.", "VillaBosch"],
-        "Villa Chacabuco": ["Chacabuco", "V. Chacabuco", "Chaca", "VillaChaca"],
+        "Villa Chacabuco": [ "V. Chacabuco", "VillaChaca"],
         "Villa Coronel Arias": ["C. Arias", "Villa Arias", "Arias Bs.As.", "VillaCoronel"],
         "Villa de los Patricios": [ "V. Patricios", "Patricios Bs.As.", "VillaPatri"],
         "Villa España": [ "V. España", "España Bs.As.", "VillaEspaña"],
@@ -288,6 +304,7 @@ export const locationDictionary: dictType = {
         "Villa Zavaleta": ["Zavaleta", "V. Zavaleta", "Zavaleta Bs.As.", "VillaZavala"],
         "Villa Zula": ["Zula", "V. Zula", "Zula Bs.As.", "VillaZula"],
         "Venado Tuerto": ["venado tuerto", "venad tuerto"],
+        "Azul": ["azul"],
 
         //Caba localidades:
 
@@ -313,9 +330,9 @@ export const locationDictionary: dictType = {
 
 
         //GBA Norte
-        "Beccar": ["beccar", "becar"],
+        "Beccar": ["beccar", "becar", "bekar"],
         "Bella Vista": ["bella vista", "bellavista"],
-        "Boulogne Sur Mer": ["boulogne", "boulogne sur mer"],
+        "Boulogne Sur Mer": ["boulogne", "boulogne sur mer", "bulogne", "boulojne", "bologne","bulojne"],
         "Carapachay": ["carapachay", "carapachai"],
         "Florida": ["florida", "florida oeste", "florida este"],
         "La Lucila": ["la lucila", "lucila"],
@@ -343,33 +360,43 @@ export const locationDictionary: dictType = {
         "Ranelagh": ["ranelagh"],
         "Sourigues": ["sourigues"],
         "Tandil": ["tandil", "tandíl", "tandl", "tandel"],
-        
+        "Virreyes": ["virreyes"],
         "Virrey del Pino": ["birrey del pino", "virrey del pino"],
         "Wilde": ["Wilde", "Wilde Avellaneda", "Wild", "Vilde"],
-        "Catamarca": ["Cata", "Cata.", "Catam"],
-        "Chaco": ["Ch", "Provincia del Chaco"],
-        "Chubut": ["Chbt", "Provincia del Chubut"],
-        "Córdoba": ["Cordoba", "Cba", "CBA", "Córdova"],
-        "Corrientes": ["Corriente", "Ctés", "Ctes"],
-        "Entre Ríos": ["EntreRios", "E. Rios", "ER", "Entrerios"],
-        "Formosa": ["Form", "Fsa"],
-        "Jujuy": ["Juy", "Jj", "San Salvador", "S.S. de Jujuy"],
-        "La Pampa": ["LP", "L.Pampa", "Pampa"],
-        "La Rioja": ["L.R.", "Rioja", "L Rioja"],
-        "Mendoza": ["Mza", "Mendoza Capital"],
-        "Misiones": ["Mision", "Mnes", "Posadas (confusión con capital)"],
-        "Neuquén": ["Neuquen", "Nqn", "NQN"],
-        "Río Negro": ["Rio Negro", "R.Negro", "RN"],
-        "Salta": ["Sta", "Salta Capital"],
-        "San Juan": ["S.Juan", "Sto. Juan", "SJ"],
-        "San Luis": ["S.Luis", "SL", "Sto. Luis", "San Luis"],
-        "Santa Cruz": ["S.Cruz", "Sta. Cruz", "SC"],
-        "Santa Fe": ["Sta Fe", "S.Fe", "SantaFe", "SFe"],
-        "Santiago del Estero": ["Sgo. del Estero", "Santiago", "S.del Estero", "SDE"],
+        "Catamarca": ["Cata", "Cata.", "Catam", "catamarca capital", "capital catamarca"],
+        "Chaco": ["Ch", "Provincia del Chaco", "chaco capital", "capital chaco"],
+        "Chubut": ["Chbt", "Provincia del Chubut", "chubut capital", "capital chubut"],
+        "Córdoba": ["Cordoba", "Cba", "CBA", "Córdova", "Cordoba Capital", "capital cordoba"],
+        "Corrientes": ["Corriente", "Ctés", "Ctes", "corrientes capital", "capital corrientes"],
+        "Entre Ríos": ["EntreRios", "E. Rios", "ER", "Entrerios", "entre rios capital", "capital entre rios"],
+        "Formosa": ["Form", "Fsa", "formosa capital", "capital formosa"],
+        "Jujuy": ["Juy", "Jj", "San Salvador", "S.S. de Jujuy", "jujuy capital", "capital jujuy"],
+        "La Pampa": ["LP", "L.Pampa", "Pampa", "la pampa capital", "capital la pampa"],
+        "La Rioja": ["L.R.", "Rioja", "L Rioja", "La Rioja capital", "capital la rioja"],
+        "Mendoza": ["Mza", "Mendoza Capital", "capital mendoza"],
+        "Misiones": ["Mision", "Mnes", "posadas", "misiones capital", "capital misiones"],
+        "Neuquén": ["Neuquen", "Nqn", "NQN", "neuquen capital", "capital neuquen"],
+        "Río Negro": ["Rio Negro", "R.Negro", "RN", "rio negro capital", "capital rio negro"],
+        "Salta": ["Sta", "salta capital", "capital salta"],
+        "San Juan": ["S.Juan", "Sto. Juan", "SJ", "San juan capital", "capital san juan"],
+        "San Luis": ["S.Luis", "SL", "Sto. Luis", "San Luis", "capital san luis", "san luis capital"],
+        "Santa Cruz": ["S.Cruz", "Sta. Cruz", "SC", "santa cruz capital", "capital santa cruz"],
+        "Santa Fe": ["Sta Fe", "S.Fe", "SantaFe", "SFe", "santa fe capital", "capital santa fe"],
+        "Santiago del Estero": ["Sgo. del Estero", "Santiago", "S.del Estero", "SDE", "santiago del estero capital", "capital santiago del estero"],
         "Tierra del Fuego, Antártida e Islas del Atlántico Sur": ["Tierra del Fuego", "T.del Fuego", "TDF", "Tierra del Fuego Antartida", "Usuahia (error por capital)"],
         "Tucumán": ["Tucuman"],
         "Orense": ["orense"],
         "Bahia Blanca": ["bahia blanca", "b blanca", "bahia blanc", "b. blanca"],
-        "Carmen de Areco": ["c areco", "carm areco", "carmen de arec"]
+        "Carmen de Areco": ["c areco", "carm areco", "carmen de arec"],
+        "Miramar": ["miramar"],
+        "Pinamar": ["pinamar"],
+        "Mar de las Pampas": ["mar de las pampas", "mar de las pamp", "mar de las pompas"],
+
+        "Zona Oeste": ["zona oeste", "zona oes", "zona oes", "sona oeste"],
+        "Zona Sur": ["zona sur", "zona su", "sona sur"],
+        "Zona Norte": ["zona norte", "zona n", "sona norte"],
+        "Zona Este": ["zona este", "zona e"],
+        "Zona Noroeste": ["zona noroeste", "zona noroes", "sona noroeste"],
+        //
     }
 }

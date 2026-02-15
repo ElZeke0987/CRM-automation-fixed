@@ -8,7 +8,7 @@ export function testSelectorOnWsp(){
     
     if(whatsappNumberElement&&whatsappNumberElement.length>0){
         alert("Elemento encontrado (revisar consola)")
-        console.log("whatsappNumberElement: ", whatsappNumberElement)
+        console.log("Elementos encontrados: ", whatsappNumberElement)
         return
     }
     alert("Elemento no encontrado")

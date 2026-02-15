@@ -32,23 +32,70 @@ const inputTextWithNumberSelector = `.x1hx0egp.x6ikm8r.x1odjw0f.x1k6rcq7.x6prxxf
 
 export const allInMessagesSelector = `.message-in .x9f619.x1hx0egp.x1yrsyyn.xizg8k.xu9hqtb.xwib8y2 .copyable-text .copyable-text span`
 
+export const allOutMessagesSelector = `.message-out .x9f619.x1hx0egp.x1yrsyyn.xizg8k.xu9hqtb.xwib8y2 .copyable-text .copyable-text span`
+
+
 const elementsToClearSelector = `.x1c4vz4f.x2lah0s.xdl72j9.xlese2p`
 
 const innerInMessageContentSelector = `.copyable-text .copyable-text`
 
-function extractMessagesFromElement(): Promise<string[]> {
+function mergeMessages(messages: string[]): string[] {
+  const result: string[] = [];
+  let buffer = "";
+  let merging = false;
+  let shouldContinueNext = false;
+  for (let i = 0; i < messages.length; i++) {
+    if(shouldContinueNext){
+        shouldContinueNext = false;
+        continue
+    }
+    const current = messages[i];
+
+    const isOnlyNewline = current.trim() === "";
+    const endsWithNewline = /\n\s*$/.test(current);
+
+    if (endsWithNewline || isOnlyNewline || merging) {
+      merging = true;
+
+      if (!isOnlyNewline) {
+        buffer += current.trim();
+        buffer += " ";
+      }
+
+      // Si el próximo NO continúa el flujo, cerramos
+      const next = messages[i + 1];
+      const nextContinues = next && (/\n\s*$/.test(next) || next.trim() === "");
+
+      if (!nextContinues && next) {
+        buffer += next.trim();
+        shouldContinueNext = true;
+        result.push(buffer.trim())
+        buffer = "";
+        merging = false;
+      }
+
+    } else {
+      result.push(current.trim());
+    }
+  }
+
+  return result;
+}
+
+
+
+
+function extractMessagesFromElement(selector: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     const start = Date.now()
     const interval = setInterval(() => {
-      const el = document.querySelectorAll(allInMessagesSelector) as NodeListOf<HTMLElement>
+      const el = document.querySelectorAll(selector) as NodeListOf<HTMLElement>
       if (el) {
-        const messages = Array.from(el).map((element, index) => {
-          //console.log("Mensaje:", index, element.innerHTML)
-          return element.textContent
-        })
-        //console.log("messages", messages)
+        const messages = Array.from(el).map((element:HTMLElement) => element.textContent)
+        console.log("crude messages", messages)
+        const mergedMessages = mergeMessages(messages)
         clearInterval(interval)
-        resolve(messages)
+        resolve(mergedMessages)
       }
       if (Date.now() - start > 10000) {
         clearInterval(interval)
@@ -61,6 +108,7 @@ function extractMessagesFromElement(): Promise<string[]> {
 export const domWsp/*: DomWspTypes*/ = {
     whatsappNumberElement: () => document.querySelector(whatsappNumberSelector),
     inputTextWithNumber: () => document.querySelectorAll(inputTextWithNumberSelector)[1] as HTMLInputElement,
-    allInMessages: async () => await extractMessagesFromElement(),
+    allInMessages: async () => await extractMessagesFromElement(allInMessagesSelector),
+    allOutMessages: async () => await extractMessagesFromElement(allOutMessagesSelector),
     elementsToClear: () => document.querySelectorAll(elementsToClearSelector)
 }

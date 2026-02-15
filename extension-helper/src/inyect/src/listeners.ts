@@ -3,6 +3,7 @@
 import { domCRM } from "./vars/domVars";
 import { handleKeyInyected } from "./keyHandling";
 import { onWindowLoadInyected } from "./onWindowLoad";
+import { onWindowFocus } from "./onWindowFocus";
 
 
 
@@ -31,7 +32,10 @@ export function setupListeners({catchNumbersOnInputs=true, onWindowLoadFunc=onWi
     });
   });
 
+  
   window.addEventListener("load", onWindowLoadFunc)
 
-  document.addEventListener("keypress", async (ev)=>await keyHandlerFunc(ev))
+  document.addEventListener("keydown", async (ev)=>await keyHandlerFunc(ev))
+  
+  window.addEventListener("focus", async (ev)=>await onWindowFocus(ev))
 }

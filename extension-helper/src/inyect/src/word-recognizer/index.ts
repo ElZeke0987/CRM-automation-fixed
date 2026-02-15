@@ -18,3 +18,4 @@ export function initRecognizing(input: string | string[]) {
     }
     
 }
+

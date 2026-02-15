@@ -1,25 +1,9 @@
-import { CopiedText } from "./types";
-
-export function formatNumber(num: string): string {
-    return num.replace(/\D+/g, '')
-}
-
-export async function getCopiedText(): Promise<CopiedText | undefined> {
-    const crudeJSON = await navigator.clipboard.readText()
-    try {
-    return JSON.parse(crudeJSON);
-  } catch {
-    return undefined;
-  }
-}
-
-// Función para sumar
 export async function plusToStorage(valor: number, storageKey: string, forceNNN: boolean = false) {
 
     const lastWasNNN = await chrome.storage.local.get("lastWasNNN");
     if(lastWasNNN.lastWasNNN === "true" || forceNNN){
-
-        let contador = parseInt(localStorage.getItem("NNN_" + storageKey) || "0");
+        const nnnCount = (await chrome.storage.local.get(["NNN_" + storageKey]))["NNN_" + storageKey] || "0";
+        let contador = Number(nnnCount);
         contador += valor;
         chrome.storage.local.set({[`NNN_${storageKey}`]: contador.toString()});
         chrome.storage.local.set({"lastWasNNN": "false"});
@@ -27,9 +11,9 @@ export async function plusToStorage(valor: number, storageKey: string, forceNNN:
         return;
     }
 
-    let contador = Number(localStorage.getItem(storageKey)) || 0;
+    const count = (await chrome.storage.local.get([storageKey]))[storageKey];
+    let contador = Number(count) || 0;
     contador += valor;
     chrome.storage.local.set({[storageKey]: contador.toString()});
     //console.log("Número actualizado:", contador);
 }
-

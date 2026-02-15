@@ -22,7 +22,28 @@
     position: static;
 }
 
-
+.revision-request-ui{
+    position: static;
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.revision-request-ui select, .revision-request-ui *{
+    background-color: #fff;
+    color: #000;
+}
+.revision-request-ui .revision-request-ui-body{
+    display: flex;
+    flex-direction: column;
+    
+}
+.revision-request-ui .revision-request-ui-body input::placeholder{
+    color: #666;
+}
 .copy-function-advise{
     all: initial;
     font-family: system-ui;
@@ -40,4 +61,16 @@
 .inactive-copy, .advises-section .copy-function-advise .inactive-copy{
     background-color: red ;
     color: #fff;
+}
+
+.tool-panel{
+    all: initial;
+    font-family: system-ui;
+    position: static;
+    z-index: 100000;
+    background-color: rgb(167, 171, 167);
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.5s ease-in-out;
 }

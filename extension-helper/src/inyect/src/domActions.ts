@@ -1,8 +1,8 @@
 
 import { formatNumber } from "./utils";
 import { areaNumbers, areasInterior } from "./vars/areasVars";
-import { copyFunctionAccessor } from "./vars/vars";
 import { domCRM } from "./vars/domVars";
+import { CopiedText } from "./types";
 export function setupPullRadio() {
     const pullRadioEl = domCRM.pullRadio() as HTMLInputElement;
     pullRadioEl.checked = true;
@@ -70,10 +70,14 @@ export function getAreaByNumber(areaNumber: string){
         }
     }
     const nnnButtonEl = domCRM.nnnButton();
-    (nnnButtonEl[1] as HTMLButtonElement).dispatchEvent(new Event("click", {bubbles: true}))
-    
+    if(nnnButtonEl.length > 1){
+        (nnnButtonEl[1] as HTMLButtonElement).dispatchEvent(new Event("click", {bubbles: true}))
+        
+    }
+    if(areaNumbers[areaNumber]=="yes"){
+        return "agua"
+    }
     return "NNN"
-    
 }
 
 export function mostrarcampo(){//Es como un re-render normal, solo para verificar sobre algo que ya paso, que es el click automatico sobre un radio
@@ -120,4 +124,36 @@ export function mostrarcampo(){//Es como un re-render normal, solo para verifica
         spullderiEl.setAttribute("required","");  
     }
     
+}
+
+
+export function insertOnInputs(leadData: CopiedText){
+    console.log("insertOnInputs", leadData)
+    const areaNumber = leadData.whatsappNumber.split(" ")[2]
+    setupPullRadio();
+    setToInterior({areaNumber, isNNNAction: false});
+    console.log("Copiando texto en el input de numero y de localidad")
+    const leadCelInp = domCRM.leadCelInp();
+    const leadLocInp = domCRM.leadLocationInp();
+
+    if(leadCelInp){
+        leadCelInp.value = "+" + formatNumber(leadData.whatsappNumber)
+        leadCelInp.dispatchEvent(new Event("input", {bubbles: true}))
+    }
+    if(leadLocInp){
+        
+        leadLocInp.value = leadData.recognized.location
+        console.log("leadLocInp.value", leadLocInp.value)
+        leadLocInp.dispatchEvent(new Event("input", {bubbles: true}))
+    }
+    if(!leadData.recognized.pull){
+        //alert("No hay PULL para: " + leadData.recognized.location)
+    }else if(leadData.recognized.pull && leadData.recognized.pull != "interior"){
+        setupPullRadio()
+        const pullElementSelect = domCRM.pullElementSelect() as HTMLSelectElement
+        
+        pullElementSelect.value = leadData.recognized.pull
+        pullElementSelect.dispatchEvent(new Event("change", { bubbles: true }));
+        console.log("leadData.recognized.pull", leadData.recognized.pull)
+    }
 }
