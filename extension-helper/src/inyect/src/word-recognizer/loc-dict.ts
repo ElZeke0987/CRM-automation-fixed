@@ -26,7 +26,7 @@ export const noroestePullLocs = [//101
     "bella vista", "olivos", "don torcuato", "luján", "castelar", "paso del rey", "villa luzuriaga",
     "el talar", "matheu", "boulogne sur mer", "beccar", "zona oeste", "zona norte", "zona noroeste",
     "san antonio de padua", "libertad", "gral rodríguez", "mariano acosta", "virreyes", "villa de mayo",
-    "González Catán", "munro", "los polvorines"
+    "González Catán", "munro", "los polvorines", "Ing. Pablo Nogués"
 ];
 
 export const partidos = [//Para que cuando hayan varias coincidencias, se elige primero la localidad antes que el partido
@@ -41,7 +41,7 @@ export const cabaPullLocs = [ //102
     "nuñez", "palermo", "recoleta", "retiro", "saavedra", "san cristobal", "san nicolas", 
     "velez sarsfield", "villa devoto", "villa del parque", "villa paternal", "villa santa rita", 
     "villa soldati", "villa urquiza", "villa trujui", "villa lugano", "villa martelli", "ciudadela",
-    "villa ballester"
+    "villa ballester", "San Telmo"
 
 ];
 
@@ -52,7 +52,7 @@ export const varelaPullLocs = [ //103
     "San Francisco Solano Este","San Francisco Solano Oeste",
     "Pereyra","Ringuelet","Gorina","City Bell","Villa Domselaar","Ardigó"
     ,"Bosques","Zeballos", "platanos", "ranelagh", "ezpeleta", "Villa Vatteone","Punta Lara", "el pato",
-    "Ardigó","Villa Garibaldi","Pereyra", "hudson", "burzaco", "bernal oeste", "berisso"
+    "Ardigó","Villa Garibaldi","Pereyra", "hudson", "burzaco", "bernal oeste", "berisso", "bernal este", "bernal"
 
 ] as const;
 
@@ -155,7 +155,8 @@ export const locationDictionary: dictType = {
 
         "Villa España (Berazategui)": ["villa españa berazategui", "v. españa bera"],
         "Villa Mitre (Berazategui)": ["villa mitre berazategui", "v. mitre bera"],
-
+        "Ing. Pablo Nogués": ["Ingeniero Pablo Nogues", "I Pablo Nogues", "Pablo Nogues", "Pablo Noguez", "Pablo Nogués", "Ingeniero Pablo Nogués"],
+        "San Telmo": ["san telmo", "sn telmo", "San thelmo"],
         "Hudson": ["hudson", "platanos hudson"],
         "Pereyra": ["pereyra", "pereyra iraola"],
         "Villa Elisa": ["villa elisa", "v. elisa"],
